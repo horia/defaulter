@@ -1,0 +1,11 @@
+# Allow traffic on port 80 and 443 to and from the external interface
+#
+anchor "defaulter" on egress {
+  # inbound for relayd
+  pass in log proto tcp to (egress) port { http https } \
+    keep state (max 500, max-src-conn-rate 100/10)
+
+  # outbound for other services and apps
+  pass out log proto tcp from (egress) to port { http https }
+}
+
