@@ -46,12 +46,12 @@ example.com.                    IN      AAAA    2001:0db8::4
 www.example.com.                IN      CNAME   example.com.
 ```
 
-If needed, include [*pf.conf.webserver*](src/etc/pf.conf.webserver) in */etc/pf.conf*
+If needed, include [*pf.conf.defaulter*](src/etc/pf.conf.defaulter) in */etc/pf.conf*
 ```console
 # pf.conf
 # Allow traffic on port 80 and 443 to and from the external interface
 #
-anchor "webserver" on egress {
+anchor "defaulter" on egress {
   # inbound for relayd
   pass in log proto tcp to (egress) port { http https } \
     keep state (max 500, max-src-conn-rate 100/10)
