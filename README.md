@@ -81,7 +81,7 @@ rcctl restart httpd
 
 Install and configure [*relayd.conf*](src/etc/relayd.conf)
 
-To initialize `relayd` without certificates, comment out the relay "https" and https2" as well as the *tls keypair* statements from [*relayd.conf*](src/etc/relayd.conf)
+To initialize `relayd` without certificates, comment out the relay "https" and "https2" as well as the *tls keypair* statements from [*relayd.conf*](src/etc/relayd.conf)
 ```sh
 rcctl restart relayd
 ```
