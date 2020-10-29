@@ -1,6 +1,6 @@
 # defaulter
 
-Default OpenBSD webserver
+Default OpenBSD Web Server
 ```console
 server "default" {}
 ```
