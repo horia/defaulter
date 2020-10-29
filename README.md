@@ -16,7 +16,7 @@ The default server is automatically used by httpd(8) in the absence of a custom 
 
 Using default servers can simplify website hosting.
 
-# Why
+## Why
 
 * reduce configuration clutter
 * simplify webhosting operations
@@ -25,7 +25,7 @@ Using default servers can simplify website hosting.
 
 ## How
 
-To add a new website, simply create a directory and configure TLS
+To add a new website, simply create a directory and configure TLS.
 
 ## Features
 
@@ -36,6 +36,7 @@ To add a new website, simply create a directory and configure TLS
 ## Getting started
 
 Let's add the "www.example.com" website using default servers.
+
 *please keep reading, a reward for all defaulters' waiting at the end*
 
 Add DNS resource records A[AAA] or CNAME for your domain(s)
@@ -62,6 +63,7 @@ anchor "webserver" on egress {
 ```
 
 Install and configure [*httpd.conf*](src/etc/httpd.conf)
+
 Add the parent domain *example.com* alias to redirect it to "www.example.com":
 ```console
 # httpd.conf
@@ -78,6 +80,7 @@ rcctl restart httpd
 ```
 
 Install and configure [*relayd.conf*](src/etc/relayd.conf)
+
 To initialize `relayd` without certificates, comment out the relay "https" and https2" as well as the "tls keyname" statements from [*relayd.conf*](src/etc/relayd.conf)
 ```sh
 rcctl restart relayd
@@ -99,6 +102,7 @@ acme-client -v www.example.com
 ```
 
 Uncomment the earlier comments from [*relayd.conf*](src/etc/relayd.conf)
+
 Add the *www.example.com* keypair:
 ```console
 # relayd.conf
