@@ -35,7 +35,7 @@ To add a new website, simply create a directory and configure TLS.
 
 ## Getting started
 
-Let's add the "www.example.com" website using default servers.
+Let's add the *www.example.com* website using default servers.
 
 *please keep reading, a reward for all defaulters' waiting at the end*
 
@@ -64,7 +64,7 @@ anchor "defaulter" on egress {
 
 Install and configure [*httpd.conf*](src/etc/httpd.conf)
 
-Add the parent domain *example.com* alias to redirect it to "www.example.com":
+Add the parent domain *example.com* alias to redirect it to *www.example.com*:
 ```console
 # httpd.conf
 server "defaulter https redirect to www" {
