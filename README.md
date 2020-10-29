@@ -113,5 +113,5 @@ tls keypair www.example.com
 rcctl restart relayd
 ```
 
-For the promised reward, please note that subsequent TLS modifications only involve `acme-client` and changin the *tls keypair* for relayd.
+For the promised reward, please note that subsequent TLS modifications only involve `acme-client` and changin the *tls keypair* for `relayd`.
 
