@@ -95,13 +95,14 @@ rcctl restart relayd
 domain www.example.com {
 	alternative names { example.com }
 	domain key "/etc/ssl/private/www.example.com.key"
-	domain full chain certificate "/etc/ssl/www.example.com.fullchain.pem"
+	domain full chain certificate "/etc/ssl/www.example.com.crt"
 	sign with letsencrypt
 }
 ...
 ```
 ```sh
 acme-client -v www.example.com
+ocspcheck -vNo /etc/ssl/example.com.ocsp /etc/ssl/example.com.crt
 ```
 
 Uncomment the earlier comments from [*relayd.conf*](src/etc/relayd.conf)
@@ -113,6 +114,19 @@ tls keypair www.example.com
 ...
 ```
 ```sh
+rcctl restart relayd
+```
+
+Install */etc/daily.local* for daily updates:
+```console
+# daily.local
+name="$(awk '/^[[:space:]]*tls keypair/{printf "%s ",$NF}' /etc/relayd.conf)"
+for n in ${name}
+ do
+  next_part "Let's Encrypt $n"
+  acme-client -v $n
+  ocspcheck -vNo /etc/ssl/$n.ocsp /etc/ssl/$n.crt
+done
 rcctl restart relayd
 ```
 
