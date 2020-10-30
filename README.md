@@ -72,7 +72,7 @@ server "defaulter https redirect to www" {
 ...
 ```
 
-Add the document root for *www.example.com*:
+#### Add the document root for *www.example.com*:
 ```sh
 mkdir /var/www/htdocs/www.example.com
 echo Hello > /var/www/htdocs/www.example.com/index.html
@@ -86,7 +86,7 @@ To initialize `relayd` without certificates, comment out the relay "https" and "
 rcctl restart relayd
 ```
 
-Configure TLS:
+#### Configure TLS:
 ```console
 # acme-client.conf
 domain www.example.com {
