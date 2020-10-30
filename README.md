@@ -25,7 +25,7 @@ Using default servers can simplify website hosting.
 
 ## How
 
-To add a new website, simply create a directory and configure TLS.
+To add a new website, simply [create a directory](#add-the-document-root-for-wwwexamplecom) and [configure TLS](#configure-tls).
 
 ## Features
 
