@@ -35,15 +35,15 @@ To add a new website, simply [create a directory](#add-the-document-root-for-www
 
 ## Getting started
 
-Let's add the *www.example.com* website using default servers.
+Let's add the `www.example.com` website using default servers.
 
 *please keep reading, a reward for all defaulters' waiting at the end*
 
 Add DNS resource records A[AAA] or CNAME for your domain(s)
 ```console
-example.com.                    IN      A       203.0.113.4
-example.com.                    IN      AAAA    2001:0db8::4
-www.example.com.                IN      CNAME   example.com.
+example.com.		IN	A	203.0.113.4
+example.com.		IN	AAAA	2001:0db8::4
+www.example.com.	IN	CNAME	example.com.
 ```
 
 If needed, include [*pf.conf.defaulter*](src/etc/pf.conf.defaulter) in */etc/pf.conf*
@@ -59,24 +59,27 @@ anchor "defaulter" on egress {
   # outbound for other services and apps
   pass out log proto tcp from (egress) to port { http https }
 }
+anchor "relayd/*"
 ...
 ```
 
 Install and configure [*httpd.conf*](src/etc/httpd.conf)
 
-Add the parent domain *example.com* alias to redirect it to *www.example.com*:
+Add the parent domain *example.com* alias to redirect it to `www.example.com`:
 ```console
 # httpd.conf
 server "defaulter https redirect to www" {
   alias "example.com"
 ...
 ```
+```sh
+rcctl reload httpd
+```
 
-#### Add the document root for *www.example.com*:
+#### Add the document root for `www.example.com`
 ```sh
 mkdir /var/www/htdocs/www.example.com
 echo Hello > /var/www/htdocs/www.example.com/index.html
-rcctl restart httpd
 ```
 
 Install and configure [*relayd.conf*](src/etc/relayd.conf)
@@ -86,7 +89,7 @@ To initialize `relayd` without certificates, comment out the relay "https" and "
 rcctl restart relayd
 ```
 
-#### Configure TLS:
+#### Configure TLS
 ```console
 # acme-client.conf
 domain www.example.com {
@@ -103,7 +106,7 @@ acme-client -v www.example.com
 
 Uncomment the earlier comments from [*relayd.conf*](src/etc/relayd.conf)
 
-Add the *www.example.com* keypair:
+Add the `www.example.com` keypair:
 ```console
 # relayd.conf
 tls keypair www.example.com
