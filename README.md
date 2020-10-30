@@ -102,7 +102,7 @@ domain www.example.com {
 ```
 ```sh
 acme-client -v www.example.com
-ocspcheck -vNo /etc/ssl/example.com.ocsp /etc/ssl/example.com.crt
+ocspcheck -vNo /etc/ssl/www.example.com.ocsp /etc/ssl/www.example.com.crt
 ```
 
 Uncomment the earlier comments from [*relayd.conf*](src/etc/relayd.conf)
@@ -117,7 +117,9 @@ tls keypair www.example.com
 rcctl restart relayd
 ```
 
-Install */etc/daily.local* for daily updates:
+For the promised reward, please note that subsequent TLS modifications only involve `acme-client` and changin the *tls keypair* for `relayd`.
+
+Install [*/etc/daily.local*](src/etc/daily.local) for daily updates:
 ```console
 # daily.local
 name="$(awk '/^[[:space:]]*tls keypair/{printf "%s ",$NF}' /etc/relayd.conf)"
@@ -129,6 +131,4 @@ for n in ${name}
 done
 rcctl restart relayd
 ```
-
-For the promised reward, please note that subsequent TLS modifications only involve `acme-client` and changin the *tls keypair* for `relayd`.
 
