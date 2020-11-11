@@ -3,7 +3,7 @@ for n in ${name}
  do
   next_part "Let's Encrypt $n"
   acme-client -v $n
-  ocspcheck -vNo /etc/ssl/$n.ocsp /etc/ssl/$n.crt
+  ocspcheck -vNo /etc/ssl/$n.{ocsp,crt}
 done
 rcctl restart relayd
 
